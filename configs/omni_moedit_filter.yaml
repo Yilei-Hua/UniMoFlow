@@ -1,0 +1,86 @@
+
+exp:
+  root_ckpt_dir: '../checkpoints'
+  root_log_dir: '../logs'
+  diff_name: 'Omni-MoEdit-DiT'
+  device: 'cuda:0'
+  seed: 10306
+
+vae_name: 'hrvae_detail'
+vae_config: '../configs/vae_hrvae_detail.yaml'
+vae_checkpoint: '../pretrained/hrvae_detail/net_best_mpjpe.tar'
+vae_ckpt: 'net_best_mpjpe.tar'
+
+diffusion:
+  which_epoch: 'net_best_fid.tar'
+  checkpoint_path: '../pretrained/umt5-xxl/models_t5_umt5-xxl-enc-bf16.pth'
+  tokenizer_path: '../pretrained/umt5-xxl/tokenizer'
+  input_dim: 32
+  hidden_dim: 1024
+  ffn_dim: 2048
+  num_layers: 9
+  num_heads: 8
+  text_dim: 4096
+  text_len: 150
+  dropout_prob: 0.1
+  noise_steps: 10
+  drop_out: 0.1
+  cfg_scale: 5.0
+  prediction_type: 'vel'
+  use_text_cond: true
+  use_logit_normal: false
+  time_scale: 10.0
+
+flowedit:
+  num_steps: 10
+  cfg_scale_tgt: 5.0
+  use_source_cfg: false
+  source_cfg_scale: 1.0
+
+filtering:
+  min_r_precision_threshold: 0.7
+  min_matching_threshold: 0.6
+  min_matching_margin: 0.1
+  matching_margin_when_rprec_equal: 0.1
+  min_preserve: 0.40
+  max_preserve: 0.95
+  require_top1_improvement: false
+  save_all_generated: false
+  save_rejected: true
+
+reedit_filter:
+  min_matching_threshold: 0.7
+  min_matching_improvement: 0.1
+  max_preserve_threshold: 0.8
+  save_rejected: true
+
+data:
+  name: 'snapmogen'
+  root_dir: '../data/SnapMoGen'
+  unit_length: 8
+  joint_num: 24
+  dim_pose: 296
+  motion_dim: 148
+  fps: 30
+  max_motion_length: 320
+  motion_length: 120
+  max_text_length: 120
+  min_motion_length: 128
+  latent_dir: 'latents_hrvae_detail'
+  downsample_ratio: 4
+  raw_feat_dir: 'renamed_feats'
+  meta_dir: 'meta_data'
+  split_dir: 'data_split_info'
+
+evaluator:
+  config_path: '../configs/evaluator.yaml'
+
+io:
+  input_json: '../outputs/omni_moedit/edit_pairs.json'
+  output_dir: '../outputs/omni_moedit/synthesized_pairs'
+  batch_size: 32
+  num_workers: 4
+
+logging:
+  log_interval: 10
+  save_metrics_detail: true

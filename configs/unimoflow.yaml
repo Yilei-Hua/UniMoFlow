@@ -1,0 +1,90 @@
+
+exp:
+  root_ckpt_dir: '../checkpoints'
+  root_log_dir: '../logs'
+  name: 'UniMoFlow'
+  device: 'cuda:0'
+  is_continue: false
+  is_finetune: false
+  is_train: true
+  seed: 10306
+
+vae_name: 'hrvae_detail'
+vae_config: '../configs/vae_hrvae_detail.yaml'
+vae_checkpoint: '../pretrained/hrvae_detail/net_best_mpjpe.tar'
+vae_ckpt: 'net_best_mpjpe.tar'
+
+data:
+  name: 'snapmogen'
+  root_dir: '../data/SnapMoGen'
+  edit_data_files:
+    - '../data/edit_pairs/train_pairs.json'
+  edit_val_files:
+    - '../data/edit_pairs/val_pairs.json'
+  edit_test_files:
+    - '../data/edit_pairs/test_pairs.json'
+  cycle_aug_prob: 0.5
+  gen_latent_dir: '/latents_hrvae_detail'
+  max_motion_length: 320
+  min_motion_length: 128
+  motion_length: 120
+  max_text_length: 120
+  unit_length: 8
+  dim_pose: 296
+  joint_num: 24
+  fps: 30
+  downsample_ratio: 4
+  meta_dir: 'meta_data'
+  split_dir: 'data_split_info'
+  raw_feat_dir: 'renamed_feats'
+  feat_dir: '../data/SnapMoGen/renamed_feats'
+  use_latents: true
+
+model:
+  checkpoint_path: '../pretrained/umt5-xxl/models_t5_umt5-xxl-enc-bf16.pth'
+  tokenizer_path: '../pretrained/umt5-xxl/tokenizer'
+  input_dim: 32
+  hidden_dim: 1024
+  ffn_dim: 2048
+  num_layers: 9
+  num_heads: 8
+  num_registers: 0
+  text_dim: 4096
+  text_len: 150
+  dropout_prob: 0.1
+  noise_steps: 10
+  eval_noise_steps: 10
+  cfg_scale: 5.0
+  time_scale: 10.0
+  prediction_type: 'vel'
+  use_logit_normal: false
+  logit_mean: 0.0
+  logit_std: 1.0
+  fusion_schedule: 'asymmetric'
+  mlp_ratio: 2.0
+  use_adaln: true
+
+training:
+  batch_size: 128
+  max_epoch: 1000
+  lr: 2.0e-4
+  milestones: [100000, 150000]
+  warm_up_iter: 2000
+  gamma: 0.3
+  log_every: 10
+  weight_decay: 1.0e-5
+  num_workers: 4
+  save_anim_every: 10
+  structure_weight: 0.5
+  matching_weight: 0.5
+  mixing_strategy: 'all_data_joint'
+  gen_prob: 0.5
+  gen_loss_weight: 1.0
+  edit_loss_weight: 1.0
+
+evaluator:
+  config_path: '../configs/evaluator.yaml'
+  batch_size: 32
+
+io:
+  output_dir: '../outputs/unimoflow'

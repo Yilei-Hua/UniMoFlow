@@ -1,0 +1,12 @@
+[
+  {
+    "original_key": "sample_0001",
+    "split": "train",
+    "source_caption": "A person walks forward while swinging both arms naturally.",
+    "target_caption": "A person walks forward while raising the right hand.",
+    "edit_command": "Raise the right hand while continuing to walk forward.",
+    "reverse_edit_command": "Lower the right hand and resume a natural arm swing.",
+    "source_path": "data/SnapMoGen/latents_hrvae_detail/train/sample_0001.npy",
+    "edited_path": "outputs/omni_moedit/synthesized_pairs/train/sample_0001_000.npy"
+  }
+]

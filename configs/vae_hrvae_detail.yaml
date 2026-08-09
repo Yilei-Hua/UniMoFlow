@@ -1,0 +1,30 @@
+
+exp:
+  root_ckpt_dir: '../checkpoints'
+  root_log_dir: '../logs'
+  name: 'hrvae_detail'
+  device: 'cuda:0'
+  is_continue: false
+  is_train: false
+  seed: 10306
+
+data:
+  name: 'snapmogen'
+  root_dir: '../data/SnapMoGen'
+  unit_length: 4
+  joint_num: 24
+  dim_pose: 296
+  fps: 30
+  max_motion_length: 320
+  motion_length: 64
+  max_text_length: 120
+  min_motion_length: 64
+
+model:
+  z_dim: 32
+  dim: 384
+  dec_dim: 768
+  num_res_blocks: 1
+  dropout: 0.0
+  dim_mult: [1, 1, 1]
+  temperal_downsample: [true, true, false]

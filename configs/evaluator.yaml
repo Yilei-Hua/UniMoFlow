@@ -1,0 +1,60 @@
+
+exp:
+  root_ckpt_dir: '../checkpoints'
+  root_log_dir: '../logs'
+  name: 'eval_klde-5_late-5_nlayer6_norm'
+  device: 'cuda:0'
+  is_train: false
+
+data:
+  name: 'snapmotion'
+  unit_length: 8
+  root_dir: '../data/SnapMoGen'
+  joint_num: 24
+  dim_pose: 148
+  fps: 30
+  max_motion_length: 320
+  max_text_length: 120
+  min_motion_length: 120
+
+vae: true
+matching_pool_size: 100
+
+text_embedder:
+  dim_embed: 768
+  version: '../pretrained/t5-v1_1-base'
+
+motion_encoder:
+  latent_dim: 256
+  output_dim: 256
+motion_decoder:
+  latent_dim: 256
+latent_encoder:
+  vae: true
+  latent_dim: 256
+  ff_size: 1024
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  activation: 'gelu'
+text_encoder:
+  nfeats: 768
+  vae: true
+  latent_dim: 256
+  ff_size: 1024
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  activation: 'gelu'
+latent_decoder:
+  latent_dim: 256
+  ff_size: 1024
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  activation: 'gelu'
+
+inference:
+  model_path: '../pretrained/evaluator/net_best_top1.tar'
+  matching_pool_size: 100
+  repeat_time: 20

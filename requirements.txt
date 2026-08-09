@@ -1,0 +1,19 @@
+
+torch>=2.4
+torchvision
+transformers>=4.48
+tokenizers
+sentencepiece
+accelerate
+diffusers>=0.30
+einops
+ftfy
+regex
+numpy<2.0
+scipy
+PyYAML
+tqdm
+matplotlib
+Pillow
+tensorboard
+flash-attn; platform_system == "Linux"
