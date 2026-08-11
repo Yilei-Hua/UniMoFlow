@@ -1,10 +1,12 @@
 # UniMoFlow
 
+[![arXiv](https://img.shields.io/badge/arXiv-2608.09143-b31b1b.svg)](https://arxiv.org/abs/2608.09143)
+
 Official code release for **UniMoFlow: Grounding Instruction-Driven 3D Human Motion Editing in Generation**.
 
 UniMoFlow studies 3D human motion generation and instruction-driven motion editing in a unified latent flow-matching framework. The model treats text-to-motion generation and source-conditioned editing as mutually supportive abilities: it learns from high-quality text-to-motion data and synthetic instruction-edit triplets, then switches between generation and editing through a shared context token sequence and task-aware attention masks. The repository also includes the **Omni-MoEdit** data synthesis pipeline used to construct instruction-driven edit supervision.
 
-> Paper and project page links are reserved and will be updated after the arXiv version and public webpage are ready.
+> Paper: [arXiv:2608.09143](https://arxiv.org/abs/2608.09143). The project page will be added when it is ready.
 
 <p align="center">
   <img src="assets/teaser.webp" alt="UniMoFlow teaser" width="95%">
@@ -12,7 +14,7 @@ UniMoFlow studies 3D human motion generation and instruction-driven motion editi
 
 ## Links
 
-- Paper: **coming soon**
+- Paper: [arXiv](https://arxiv.org/abs/2608.09143) | [PDF](https://arxiv.org/pdf/2608.09143)
 - Project page: **coming soon**
 - Checkpoints: **coming soon**
 - Omni-MoEdit synthetic data: **coming soon**
@@ -149,7 +151,7 @@ cd codes
 python omni_moedit/generate_multi_attribute_edits.py \
   --input ../data/SnapMoGen/all_caption_clean.json \
   --output_dir ../outputs/omni_moedit/text_pairs \
-  --model ../pretrained/Qwen3-7B \
+  --model ../pretrained/Qwen3-8B \
   --gpus 0,1 \
   --types coarse,fine,style
 
@@ -163,14 +165,15 @@ The exact JSON filenames emitted by the LLM stage depend on `--types`; pass the 
 
 ## Citation
 
-The citation will be updated when the arXiv version is available.
+If you find this work useful, please cite:
 
 ```bibtex
-@misc{unimoflow2026,
-  title  = {UniMoFlow: Grounding Instruction-Driven 3D Human Motion Editing in Generation},
-  author = {Anonymous},
-  year   = {2026},
-  note   = {Code release. Paper coming soon.}
+@article{hua2026unimoflow,
+  title   = {UniMoFlow: Grounding Instruction-Driven 3D Human Motion Editing in Generation},
+  author  = {Hua, Yilei and Jing, Beibei and Zheng, Ce and Zhou, Hanyu and Luo, Yawei and Yang, Wei},
+  journal = {arXiv preprint arXiv:2608.09143},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2608.09143}
 }
 ```
 
