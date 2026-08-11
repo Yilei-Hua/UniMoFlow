@@ -17,7 +17,7 @@ UniMoFlow studies 3D human motion generation and instruction-driven motion editi
 
 - Paper: [arXiv](https://arxiv.org/abs/2608.09143) | [PDF](https://arxiv.org/pdf/2608.09143)
 - Project page: [UniMoFlow](https://unimoflow-motion.shayla-fralix845.chatgpt.site)
-- Checkpoints: **coming soon**
+- Checkpoints: [Baidu Netdisk](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (access code: `wpun`)
 - Omni-MoEdit synthetic data: **coming soon**
 
 ## What Is Included
@@ -53,7 +53,7 @@ UniMoFlow/
   requirements.txt
 ```
 
-This repository intentionally excludes model weights, training checkpoints, datasets, logs, and generated visualizations. See `PRETRAINED_MODELS.md` and `TODO.md` for the planned release items.
+Large model weights, datasets, logs, and generated visualizations remain outside Git. Project checkpoints are hosted separately; see `PRETRAINED_MODELS.md` for downloads and the expected local layout, and `TODO.md` for the remaining release items.
 
 ## Installation
 
@@ -74,14 +74,11 @@ mkdir -p checkpoints/{vae,base_dit,unimoflow} \
   pretrained/{umt5-xxl,evaluator,t5-v1_1-base,Qwen3-8B} data outputs
 ```
 
-Then place project checkpoints and external dependencies according to `PRETRAINED_MODELS.md`. The current public repository leaves placeholders for:
+Download the project [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (access code: `wpun`) and place its three subfolders directly under `checkpoints/`. Then prepare the external dependencies according to `PRETRAINED_MODELS.md`. The remaining external or pending assets are:
 
-- UniMoFlow checkpoint.
-- HRVAE / causal VAE checkpoint.
-- evaluator checkpoint.
+- Evaluator checkpoint.
 - uMT5 text encoder assets.
 - Omni-MoEdit synthetic edit data.
-- pretrained motion DiT used by the data synthesis pipeline.
 
 ### Official upstream assets
 
@@ -231,7 +228,7 @@ If you find this work useful, please cite:
 
 ## License
 
-The final open-source license is to be added before the public release. Please do not redistribute checkpoints or datasets until their release terms are finalized.
+Final code, checkpoint, and dataset license terms will be added before the complete public release. Third-party models and datasets remain subject to their respective upstream licenses.
 
 ## Acknowledgements
 

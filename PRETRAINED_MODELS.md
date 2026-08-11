@@ -2,15 +2,15 @@
 
 Weights and datasets are deliberately excluded from Git. They will be released through external storage links and referenced from this file.
 
-## Planned Release Links
+## Release Links
 
 | Asset | Status | Link |
 |---|---|---|
-| UniMoFlow checkpoint | TODO | coming soon |
-| HRVAE / causal VAE checkpoint | TODO | coming soon |
+| UniMoFlow checkpoint | released | [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (code: `wpun`) |
+| HRVAE / causal VAE checkpoint | released | [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (code: `wpun`) |
 | Text-motion evaluator checkpoint | TODO | coming soon |
 | Omni-MoEdit synthetic edit data | TODO | coming soon |
-| Base text-to-motion DiT for data synthesis | TODO | coming soon |
+| Base text-to-motion DiT for data synthesis | released | [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (code: `wpun`) |
 | SnapMoGen base dataset | external | [official data](https://huggingface.co/datasets/Ericguo5513/SnapMoGen) |
 | uMT5 text encoder assets | external | [google/umt5-xxl](https://huggingface.co/google/umt5-xxl) |
 | Qwen3-8B for edit-text generation | external | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) |
@@ -34,6 +34,15 @@ Create or edit the following paths before running training, inference, or data s
 | Evaluator text encoder | `pretrained/t5-v1_1-base/` | varies | `google/t5-v1_1-base` |
 | Qwen3-8B | `pretrained/Qwen3-8B/` | varies | Used to generate edit commands, target captions, reverse instructions, and auxiliary annotations |
 
+Download the complete project-trained checkpoint folder from [Baidu Netdisk](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) using access code `wpun`. After extraction, the repository should contain:
+
+```text
+checkpoints/
+  unimoflow/net_best_fid.tar
+  vae/net_best_mpjpe.tar
+  base_dit/net_best_fid.tar
+```
+
 ## Example External Downloads
 
 ```bash
@@ -49,7 +58,7 @@ hf download Ericguo5513/SnapMoGen \
   --local-dir data/SnapMoGen
 ```
 
-The UniMoFlow checkpoint, VAE checkpoint, and Base DiT are project-trained weights and belong under `checkpoints/`. The evaluator and language encoders are pretrained dependencies and belong under `pretrained/`. Omni-MoEdit is a project dataset under `data/`. Release links will be added after the corresponding assets are uploaded to external storage.
+The UniMoFlow checkpoint, VAE checkpoint, and Base DiT are project-trained weights distributed in the checkpoint bundle above and belong under `checkpoints/`. The evaluator and language encoders are dependencies under `pretrained/`. Omni-MoEdit is a project dataset under `data/`; its download link will be added separately.
 
 ## SnapMoGen Base Data
 
