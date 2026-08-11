@@ -73,6 +73,18 @@ Then place external assets according to `PRETRAINED_MODELS.md`. The current publ
 - Omni-MoEdit synthetic edit data.
 - pretrained motion DiT used by the data synthesis pipeline.
 
+### Official upstream assets
+
+| Dependency | Role | Official source |
+|---|---|---|
+| SnapMoGen | Base text-motion dataset used for generation training and Omni-MoEdit synthesis | [Project](https://snap-research.github.io/SnapMoGen/) · [Code](https://github.com/snap-research/SnapMoGen) · [Data](https://huggingface.co/datasets/Ericguo5513/SnapMoGen) |
+| Qwen3-8B | Generates edit commands, target captions, reverse instructions, and auxiliary annotations | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) |
+| uMT5-XXL | Frozen text encoder used by the motion models | [google/umt5-xxl](https://huggingface.co/google/umt5-xxl) |
+| T5 v1.1 Base | Text encoder used by the text-motion evaluator | [google/t5-v1_1-base](https://huggingface.co/google/t5-v1_1-base) |
+| Wan series | Upstream video-model implementation referenced when adapting the causal VAE and DiT components to 1D motion latents | [Wan2.1](https://github.com/Wan-Video/Wan2.1) · [Wan2.2](https://github.com/Wan-Video/Wan2.2) |
+
+The Qwen and Google text-model weights are external dependencies and are not redistributed in this repository. Wan video checkpoints are not required; the Wan links above identify the upstream open-source implementations on which parts of our 1D motion architecture are based.
+
 ## Inference
 
 Generate a motion from text:
@@ -184,4 +196,4 @@ The final open-source license is to be added before the public release. Please d
 
 ## Acknowledgements
 
-This codebase builds on common components from text-to-motion generation, latent flow matching, and motion evaluation pipelines. See `THIRD_PARTY_NOTICES.md` for third-party notes.
+This codebase is built on the official [SnapMoGen](https://github.com/snap-research/SnapMoGen) codebase and adapts open-source causal-VAE and DiT design/code components from the [Wan video-model series](https://github.com/Wan-Video/Wan2.2) to 1D human-motion latents. We thank the authors of these projects and the developers of Qwen, uMT5/T5, PyTorch, and Hugging Face Transformers. See `THIRD_PARTY_NOTICES.md` for source links and licensing notes.

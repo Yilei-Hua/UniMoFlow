@@ -765,7 +765,7 @@ Examples:
                         help="Input JSON with all captions")
     parser.add_argument('--output_dir', type=str, default="../outputs/omni_moedit/text_pairs",
                         help="Output directory for JSON files")
-    parser.add_argument('--model', type=str, default="../pretrained/Qwen3-7B",
+    parser.add_argument('--model', type=str, default="../pretrained/Qwen3-8B",
                         help="Model path")
     parser.add_argument('--gpus', type=str, default="0,1",
                         help="GPU IDs to use, comma-separated")

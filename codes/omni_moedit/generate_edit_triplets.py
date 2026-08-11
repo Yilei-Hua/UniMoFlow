@@ -533,7 +533,7 @@ def main():
                         help="Output JSON path for failed sample keys")
     parser.add_argument('--resume_from', type=str, default=None,
                         help="Path to failed keys JSON file. If provided, only retry these keys from input file")
-    parser.add_argument('--model', type=str, default="../pretrained/Qwen3-7B",
+    parser.add_argument('--model', type=str, default="../pretrained/Qwen3-8B",
                         help="Model path")
     parser.add_argument('--gpus', type=str, default="0,1",
                         help="GPU IDs to use, comma-separated (e.g., '0,1,2,3')")

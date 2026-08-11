@@ -11,8 +11,10 @@ Weights and datasets are deliberately excluded from Git. They will be released t
 | Text-motion evaluator checkpoint | TODO | coming soon |
 | Omni-MoEdit synthetic edit data | TODO | coming soon |
 | Base text-to-motion DiT for data synthesis | TODO | coming soon |
-| uMT5 text encoder assets | user-provided / external | see below |
-| Qwen3-7B for edit-text generation | user-provided / external | see below |
+| SnapMoGen base dataset | external | [official data](https://huggingface.co/datasets/Ericguo5513/SnapMoGen) |
+| uMT5 text encoder assets | external | [google/umt5-xxl](https://huggingface.co/google/umt5-xxl) |
+| Qwen3-8B for edit-text generation | external | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) |
+| Evaluator T5 tokenizer/encoder | external | [google/t5-v1_1-base](https://huggingface.co/google/t5-v1_1-base) |
 
 ## Expected Local Layout
 
@@ -27,16 +29,27 @@ Create or edit the following paths before running training, inference, or data s
 | Text-motion evaluator | `pretrained/evaluator/net_best_top1.tar` | 37.6 MiB | Evaluation/filtering checkpoint |
 | Evaluator text encoder | `pretrained/t5-v1_1-base/` | varies | `google/t5-v1_1-base` |
 | Base motion DiT | `checkpoints/snapmogen/diff/Omni-MoEdit-DiT/model/net_best_fid.tar` | 1.41 GiB | Used by Omni-MoEdit synthesis |
-| Qwen3-7B | `pretrained/Qwen3-7B/` | varies | Used to generate edit commands and target captions |
+| Qwen3-8B | `pretrained/Qwen3-8B/` | varies | Used to generate edit commands, target captions, reverse instructions, and auxiliary annotations |
 
 ## Example External Downloads
 
 ```bash
-huggingface-cli download Qwen/Qwen3-7B --local-dir pretrained/Qwen3-7B
-huggingface-cli download google/t5-v1_1-base --local-dir pretrained/t5-v1_1-base
-huggingface-cli download google/umt5-xxl \
+pip install -U "huggingface_hub[cli]"
+
+hf download Qwen/Qwen3-8B --local-dir pretrained/Qwen3-8B
+hf download google/t5-v1_1-base --local-dir pretrained/t5-v1_1-base
+hf download google/umt5-xxl \
   --include "tokenizer*" "spiece.model" "special_tokens_map.json" \
   --local-dir pretrained/umt5-xxl/tokenizer
+hf download Ericguo5513/SnapMoGen \
+  --repo-type dataset \
+  --local-dir data/SnapMoGen
 ```
 
 The UniMoFlow checkpoint, HRVAE checkpoint, evaluator checkpoint, base motion DiT, and Omni-MoEdit synthetic data are project artifacts. They are currently listed as TODO items and will be linked after they are uploaded to external storage.
+
+## SnapMoGen Base Data
+
+Omni-MoEdit is synthesized from the SnapMoGen split structure, captions, and motions. Download SnapMoGen from its [official Hugging Face dataset](https://huggingface.co/datasets/Ericguo5513/SnapMoGen) and follow the preprocessing instructions in the [official SnapMoGen repository](https://github.com/snap-research/SnapMoGen). The project page is available at <https://snap-research.github.io/SnapMoGen/>.
+
+The released Omni-MoEdit files do not transfer ownership of SnapMoGen. Users must obtain and use the base dataset under its own terms.
