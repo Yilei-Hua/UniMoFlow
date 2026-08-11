@@ -92,10 +92,14 @@ class FlowEditDataset(Dataset):
             for var_idx, var in enumerate(variations):
                 if is_new_format:
                     target_caption = var.get('target_caption', '')
-                    reverse_command = var.get('reverse_command', '')
+                    reverse_command = var.get(
+                        'reverse_command', var.get('reverse_edit_command', '')
+                    )
                 else:
                     target_caption = var.get('new_caption', '')
-                    reverse_command = var.get('reverse_edit_command', '')
+                    reverse_command = var.get(
+                        'reverse_edit_command', var.get('reverse_command', '')
+                    )
 
                 items.append({
                     'original_key': original_key,

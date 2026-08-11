@@ -143,10 +143,14 @@ class ReEditDataset(Dataset):
                 for var_idx, var in enumerate(variations):
                     if 'edits' in entry:
                         tgt_cap = var.get('target_caption', '')
-                        rev_cmd = var.get('reverse_command', '')
+                        rev_cmd = var.get(
+                            'reverse_command', var.get('reverse_edit_command', '')
+                        )
                     else:
                         tgt_cap = var.get('new_caption', '')
-                        rev_cmd = var.get('reverse_edit_command', '')
+                        rev_cmd = var.get(
+                            'reverse_edit_command', var.get('reverse_command', '')
+                        )
 
                     items.append({
                         'original_key': cid,

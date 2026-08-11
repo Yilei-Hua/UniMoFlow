@@ -7,15 +7,16 @@ if str(_CODES_ROOT) not in _release_sys.path:
     _release_sys.path.insert(0, str(_CODES_ROOT))
 
 # -*- coding: utf-8 -*-
-"""
-Action Caption Editor - Multi-GPU Parallel Version with Fault Isolation
-Features:
-1. Prompt 强制英文输出
-2. 生成失败记录到失败文件，支持断点续传和失败重试
-3. 多卡并行 + Flash Attention 2 + BF16
-4. 单个样本失败隔离（不影响同批其他样本）
-5. OOM 自动降级恢复机制
-6. 支持从失败文件恢复生成 (--resume_from)
+"""Generate comprehensive, category-agnostic edit-text candidates.
+
+Unlike ``generate_multi_attribute_edits.py``, this entry point does not
+partition generation into coarse, fine, and style jobs. A single Qwen prompt
+directly samples diverse edits that may combine body-part, action-type,
+spatial, timing, and style changes. Each source caption yields
+multiple ``edit_command``/``new_caption``/``reverse_command`` variations.
+
+The implementation supports multi-GPU inference, per-sample fault isolation,
+OOM fallback, and resuming failed source keys.
 """
 
 import json

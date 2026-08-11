@@ -7,31 +7,20 @@ if str(_CODES_ROOT) not in _release_sys.path:
     _release_sys.path.insert(0, str(_CODES_ROOT))
 
 # -*- coding: utf-8 -*-
-"""
-Multi-Attribute Action Editor - Multi-GPU Parallel Version with Fault Isolation
-生成三大类编辑对，均包含 reverse_command 和 locate_edit_phase：
-1. 粗粒度动作类型编辑 (Coarse Action Type)
-2. 细粒度身体部位编辑 (Fine-grained Body Part)
-3. 风格编辑 (Style Editing)
+"""Generate category-controlled edit-text candidates.
 
-Features:
-- 包含 reverse_command（双向编辑）和 locate_edit_phase（时序定位）
-- 三类编辑独立生成，可自由选择生成哪几类（--types 参数）
-- 多卡并行 + Flash Attention 2 + BF16
-- 断点续传 + 错误隔离 + OOM 自动降级
+This complementary entry point generates three edit groups independently:
+coarse action-type edits, fine-grained body-part edits, and style edits. Each
+variation includes a reverse command and a localized source phase. For direct
+heterogeneous or compositional synthesis, use ``generate_edit_triplets.py``.
 
-Usage Examples:
-  # 生成全部三种编辑对（默认）
-  python generate_prompts_multi_attr.py --types coarse,fine,style
+Examples::
 
-  # 只生成粗粒度动作类型编辑对
-  python generate_prompts_multi_attr.py --types coarse
-
-  # 生成细粒度和风格两种编辑对
-  python generate_prompts_multi_attr.py --types fine,style
-
-  # 从之前失败的样本继续
-  python generate_prompts_multi_attr.py --types coarse --resume_from ./failed_coarse_keys.json
+    python generate_multi_attribute_edits.py --types coarse,fine,style
+    python generate_multi_attribute_edits.py --types coarse
+    python generate_multi_attribute_edits.py --types fine,style
+    python generate_multi_attribute_edits.py --types coarse \
+        --resume_from ./failed_coarse_keys.json
 """
 
 import json

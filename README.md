@@ -158,7 +158,12 @@ The evaluator reports text-to-motion metrics and editing metrics used in the pap
 
 ## Omni-MoEdit Data Synthesis
 
-The `codes/omni_moedit` folder contains the pipeline for constructing Omni-MoEdit:
+The `codes/omni_moedit` folder contains the pipeline for constructing Omni-MoEdit. The LLM stage provides two complementary generation routes:
+
+- **Comprehensive synthesis (direct route):** `generate_edit_triplets.py` directly samples heterogeneous, potentially compositional edits without assigning each sample to a fixed category. Its prompt jointly covers body parts, action types, spatial changes, timing, and styles.
+- **Category-controlled synthesis:** `generate_multi_attribute_edits.py` separately expands coarse action-type, fine-grained body-part, and style edits. Use this route when controlled per-category coverage is needed.
+
+Both routes emit source-caption records with multiple edit variations and feed the same motion-synthesis and filtering stages:
 
 1. Generate edit commands, target captions, and auxiliary metadata from source captions using a pretrained LLM.
 2. Encode source motions into latent tokens with the causal VAE.
@@ -166,7 +171,25 @@ The `codes/omni_moedit` folder contains the pipeline for constructing Omni-MoEdi
 4. Filter candidates by target-text alignment, edit improvement over the source, and motion-structure constraints.
 5. Optionally regenerate weak records and run second-stage filtering.
 
-Example:
+### Comprehensive synthesis
+
+This is the direct, category-agnostic route used to generate diverse and compositional edit candidates:
+
+```bash
+cd codes
+
+python omni_moedit/generate_edit_triplets.py \
+  --input ../data/SnapMoGen/all_caption_clean.json \
+  --output ../outputs/omni_moedit/edit_pairs.json \
+  --failed_output ../outputs/omni_moedit/failed_keys.json \
+  --model ../pretrained/Qwen3-8B \
+  --gpus 0,1 \
+  --num_commands 6
+```
+
+### Category-controlled synthesis
+
+The specialized route generates coarse, fine, and style candidates independently:
 
 ```bash
 cd codes
@@ -177,14 +200,20 @@ python omni_moedit/generate_multi_attribute_edits.py \
   --model ../pretrained/Qwen3-8B \
   --gpus 0,1 \
   --types coarse,fine,style
+```
+
+It writes `coarse_edit_pairs.json`, `fine_edit_pairs.json`, and `style_edit_pairs.json` for the selected types. Each generated JSON can be processed independently by the shared synthesis stage:
+
+```bash
+cd codes
 
 python omni_moedit/synthesize_and_filter.py \
   --config ../configs/omni_moedit_filter.yaml \
-  --input_json ../outputs/omni_moedit/text_pairs/all_edit_pairs.json \
+  --input_json ../outputs/omni_moedit/edit_pairs.json \
   --output_dir ../outputs/omni_moedit/synthesized_pairs
 ```
 
-The exact JSON filenames emitted by the LLM stage depend on `--types`; pass the desired generated JSON to `--input_json`.
+For the category-controlled route, replace `--input_json` with the desired per-category file. See [`codes/omni_moedit/README.md`](codes/omni_moedit/README.md) for the record schema and the relationship between both generation routes.
 
 ## Citation
 
