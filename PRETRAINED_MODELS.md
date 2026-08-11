@@ -9,7 +9,7 @@ Weights and datasets are deliberately excluded from Git. They will be released t
 | UniMoFlow checkpoint | released | [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (code: `wpun`) |
 | HRVAE / causal VAE checkpoint | released | [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (code: `wpun`) |
 | Text-motion evaluator checkpoint | TODO | coming soon |
-| Omni-MoEdit synthetic edit data | TODO | coming soon |
+| Omni-MoEdit synthetic edit data | released | [dataset archive](https://pan.baidu.com/s/1U7aOf-z9cjHXogDayprQyA) (code: `uupk`) |
 | Base text-to-motion DiT for data synthesis | released | [checkpoint bundle](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (code: `wpun`) |
 | SnapMoGen base dataset | external | [official data](https://huggingface.co/datasets/Ericguo5513/SnapMoGen) |
 | uMT5 text encoder assets | external | [google/umt5-xxl](https://huggingface.co/google/umt5-xxl) |
@@ -58,7 +58,7 @@ hf download Ericguo5513/SnapMoGen \
   --local-dir data/SnapMoGen
 ```
 
-The UniMoFlow checkpoint, VAE checkpoint, and Base DiT are project-trained weights distributed in the checkpoint bundle above and belong under `checkpoints/`. The evaluator and language encoders are dependencies under `pretrained/`. Omni-MoEdit is a project dataset under `data/`; its download link will be added separately.
+The UniMoFlow checkpoint, VAE checkpoint, and Base DiT are project-trained weights distributed in the checkpoint bundle above and belong under `checkpoints/`. The evaluator and language encoders are dependencies under `pretrained/`. Download the Omni-MoEdit project dataset from [Baidu Netdisk](https://pan.baidu.com/s/1U7aOf-z9cjHXogDayprQyA) using access code `uupk`, then place the extracted data under `data/`.
 
 ## SnapMoGen Base Data
 

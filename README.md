@@ -18,7 +18,7 @@ UniMoFlow studies 3D human motion generation and instruction-driven motion editi
 - Paper: [arXiv](https://arxiv.org/abs/2608.09143) | [PDF](https://arxiv.org/pdf/2608.09143)
 - Project page: [UniMoFlow](https://unimoflow-motion.shayla-fralix845.chatgpt.site)
 - Checkpoints: [Baidu Netdisk](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (access code: `wpun`)
-- Omni-MoEdit synthetic data: **coming soon**
+- Omni-MoEdit synthetic data: [Baidu Netdisk](https://pan.baidu.com/s/1U7aOf-z9cjHXogDayprQyA) (access code: `uupk`)
 
 ## What Is Included
 
