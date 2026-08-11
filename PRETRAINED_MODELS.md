@@ -1,4 +1,4 @@
-# Pretrained Models and Data Assets
+# Checkpoints, Pretrained Models, and Data Assets
 
 Weights and datasets are deliberately excluded from Git. They will be released through external storage links and referenced from this file.
 
@@ -18,17 +18,20 @@ Weights and datasets are deliberately excluded from Git. They will be released t
 
 ## Expected Local Layout
 
+All models trained specifically for this project live under `checkpoints/`.
+The `pretrained/` directory is reserved for external model dependencies.
+
 Create or edit the following paths before running training, inference, or data synthesis:
 
 | Component | Expected path | Approx. size | Notes |
 |---|---|---:|---|
-| UniMoFlow checkpoint | `pretrained/unimoflow/net_best_fid.tar` | 546 MiB | Project-trained checkpoint |
-| HRVAE / causal VAE checkpoint | `pretrained/hrvae_detail/net_best_mpjpe.tar` | 163 MiB | Encodes motions into 32-D latent tokens |
+| UniMoFlow checkpoint | `checkpoints/unimoflow/net_best_fid.tar` | 546 MiB | Project-trained checkpoint |
+| HRVAE / causal VAE checkpoint | `checkpoints/vae/net_best_mpjpe.tar` | 163 MiB | Encodes motions into 32-D latent tokens |
+| Base motion DiT | `checkpoints/base_dit/net_best_fid.tar` | 1.41 GiB | Project-trained model used by Omni-MoEdit synthesis |
 | uMT5-XXL BF16 encoder | `pretrained/umt5-xxl/models_t5_umt5-xxl-enc-bf16.pth` | 10.6 GiB | Text encoder artifact used by UniMoFlow |
 | uMT5-XXL tokenizer | `pretrained/umt5-xxl/tokenizer/` | varies | `google/umt5-xxl` tokenizer files |
 | Text-motion evaluator | `pretrained/evaluator/net_best_top1.tar` | 37.6 MiB | Evaluation/filtering checkpoint |
 | Evaluator text encoder | `pretrained/t5-v1_1-base/` | varies | `google/t5-v1_1-base` |
-| Base motion DiT | `checkpoints/snapmogen/diff/Omni-MoEdit-DiT/model/net_best_fid.tar` | 1.41 GiB | Used by Omni-MoEdit synthesis |
 | Qwen3-8B | `pretrained/Qwen3-8B/` | varies | Used to generate edit commands, target captions, reverse instructions, and auxiliary annotations |
 
 ## Example External Downloads
@@ -46,7 +49,7 @@ hf download Ericguo5513/SnapMoGen \
   --local-dir data/SnapMoGen
 ```
 
-The UniMoFlow checkpoint, HRVAE checkpoint, evaluator checkpoint, base motion DiT, and Omni-MoEdit synthetic data are project artifacts. They are currently listed as TODO items and will be linked after they are uploaded to external storage.
+The UniMoFlow checkpoint, VAE checkpoint, and Base DiT are project-trained weights and belong under `checkpoints/`. The evaluator and language encoders are pretrained dependencies and belong under `pretrained/`. Omni-MoEdit is a project dataset under `data/`. Release links will be added after the corresponding assets are uploaded to external storage.
 
 ## SnapMoGen Base Data
 

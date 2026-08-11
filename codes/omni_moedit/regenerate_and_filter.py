@@ -535,7 +535,7 @@ def load_vae_model(cfg: Dict[str, Any], device: torch.device) -> HRVAE:
 def load_diffusion_model(cfg: Dict[str, Any], device: torch.device) -> OmniMoEditDiT:
     d = cfg.diffusion
     model = OmniMoEditDiT(
-        checkpoint_path=d.checkpoint_path,
+        checkpoint_path=d.get('text_encoder_path', d.get('checkpoint_path')),
         tokenizer_path=d.tokenizer_path,
         input_dim=d.input_dim,
         hidden_dim=d.hidden_dim,
@@ -553,7 +553,9 @@ def load_diffusion_model(cfg: Dict[str, Any], device: torch.device) -> OmniMoEdi
         use_logit_normal=d.get('use_logit_normal', False),
         time_scale=d.get('time_scale', 10.0),
     )
-    ckpt_path = pjoin(cfg.exp.checkpoint_dir, 'model', d.which_epoch)
+    ckpt_path = d.get('model_checkpoint')
+    if not ckpt_path:
+        ckpt_path = pjoin(cfg.exp.checkpoint_dir, 'model', d.which_epoch)
     ckpt = torch.load(ckpt_path, map_location=device, weights_only=True)
     sd = ckpt['model'] if 'model' in ckpt else ckpt
     sd = {k.replace('module.', ''): v for k, v in sd.items()}

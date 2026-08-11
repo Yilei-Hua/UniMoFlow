@@ -382,10 +382,13 @@ class UniMoFlowInteractiveGenerator:
             edit_loss_weight=self.cfg.training.get("edit_loss_weight", 1.0) if "training" in self.cfg else 1.0,
         )
 
-        ckpt_path = self.which_epoch
-        if not os.path.isabs(ckpt_path):
-            ckpt_path = pjoin(self.cfg.exp.checkpoint_dir, "model", ckpt_path)
-        ckpt_path = maybe_code_relative(ckpt_path)
+        explicit_path = maybe_code_relative(self.which_epoch)
+        if os.path.isfile(explicit_path):
+            ckpt_path = explicit_path
+        else:
+            ckpt_path = maybe_code_relative(
+                pjoin(self.cfg.exp.checkpoint_dir, "model", self.which_epoch)
+            )
         ckpt = load_trusted_checkpoint(ckpt_path, map_location="cpu")
         state_dict = ckpt["model"] if isinstance(ckpt, dict) and "model" in ckpt else ckpt
         state_dict = {k[7:] if k.startswith("module.") else k: v for k, v in state_dict.items()}

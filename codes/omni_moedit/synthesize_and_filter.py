@@ -831,7 +831,7 @@ def load_diffusion_model(cfg: Dict[str, Any], device: torch.device) -> OmniMoEdi
     d_cfg = cfg.diffusion
 
     diff_model = OmniMoEditDiT(
-        checkpoint_path=d_cfg.checkpoint_path,
+        checkpoint_path=d_cfg.get('text_encoder_path', d_cfg.get('checkpoint_path')),
         tokenizer_path=d_cfg.tokenizer_path,
         input_dim=d_cfg.input_dim,
         hidden_dim=d_cfg.hidden_dim,
@@ -850,7 +850,9 @@ def load_diffusion_model(cfg: Dict[str, Any], device: torch.device) -> OmniMoEdi
         time_scale=d_cfg.get('time_scale', 10.0),
     )
 
-    ckpt_path = pjoin(cfg.exp.checkpoint_dir, 'model', d_cfg.which_epoch)
+    ckpt_path = d_cfg.get('model_checkpoint')
+    if not ckpt_path:
+        ckpt_path = pjoin(cfg.exp.checkpoint_dir, 'model', d_cfg.which_epoch)
     ckpt = torch.load(ckpt_path, map_location=device, weights_only=True)
 
     state_dict = ckpt['model'] if 'model' in ckpt else ckpt

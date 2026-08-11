@@ -134,7 +134,13 @@ def load_unimoflow_model(cfg, device):
     )
     model = UniMoFlow(**model_kwargs)
 
-    ckpt_path = pjoin(cfg.exp.checkpoint_dir, 'model', cfg.exp.which_epoch)
+    explicit_path = Path(cfg.exp.which_epoch)
+    if not explicit_path.is_absolute():
+        explicit_path = (Path(__file__).resolve().parent / explicit_path).resolve()
+    if explicit_path.is_file():
+        ckpt_path = str(explicit_path)
+    else:
+        ckpt_path = pjoin(cfg.exp.checkpoint_dir, 'model', cfg.exp.which_epoch)
     ckpt = load_trusted_checkpoint(ckpt_path, map_location='cpu')
 
     state_dict = ckpt['model'] if 'model' in ckpt else ckpt

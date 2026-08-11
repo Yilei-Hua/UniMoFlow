@@ -37,6 +37,15 @@ UniMoFlow/
   configs/                      # portable configuration templates
   examples/                     # minimal JSON input examples
   assets/teaser.webp            # teaser reused from the paper/project assets
+  checkpoints/                  # project-trained VAE, Base DiT, and UniMoFlow weights
+    vae/net_best_mpjpe.tar
+    base_dit/net_best_fid.tar
+    unimoflow/net_best_fid.tar
+  pretrained/                   # external pretrained model dependencies only
+    umt5-xxl/
+    evaluator/
+    t5-v1_1-base/
+    Qwen3-8B/
   CONFIGURATION.md
   PRETRAINED_MODELS.md
   THIRD_PARTY_NOTICES.md
@@ -61,10 +70,11 @@ The code expects PyTorch, CUDA-enabled dependencies, text encoder assets, evalua
 Create the expected folders:
 
 ```bash
-mkdir -p pretrained/unimoflow pretrained/hrvae_detail pretrained/umt5-xxl pretrained/evaluator data outputs
+mkdir -p checkpoints/{vae,base_dit,unimoflow} \
+  pretrained/{umt5-xxl,evaluator,t5-v1_1-base,Qwen3-8B} data outputs
 ```
 
-Then place external assets according to `PRETRAINED_MODELS.md`. The current public repository leaves placeholders for:
+Then place project checkpoints and external dependencies according to `PRETRAINED_MODELS.md`. The current public repository leaves placeholders for:
 
 - UniMoFlow checkpoint.
 - HRVAE / causal VAE checkpoint.
@@ -93,7 +103,7 @@ Generate a motion from text:
 cd codes
 python run_unimoflow.py \
   --config ../configs/unimoflow.yaml \
-  --which_epoch ../pretrained/unimoflow/net_best_fid.tar \
+  --which_epoch ../checkpoints/unimoflow/net_best_fid.tar \
   --mode t2m \
   --text "A person walks forward with a crossing-step gait." \
   --output_dir ../outputs/t2m
@@ -105,7 +115,7 @@ Edit a source latent with the native editing mode or SAFE:
 cd codes
 python run_unimoflow.py \
   --config ../configs/unimoflow.yaml \
-  --which_epoch ../pretrained/unimoflow/net_best_fid.tar \
+  --which_epoch ../checkpoints/unimoflow/net_best_fid.tar \
   --mode edit \
   --motion_file ../data/source_latent.npy \
   --is_latent true \
@@ -140,7 +150,7 @@ The default mixed-training configuration uses one generation batch and one editi
 cd codes
 python evaluate_unimoflow.py \
   --config ../configs/unimoflow.yaml \
-  --which_epoch ../pretrained/unimoflow/net_best_fid.tar \
+  --which_epoch ../checkpoints/unimoflow/net_best_fid.tar \
   --output_dir ../outputs/evaluation
 ```
 

@@ -8,12 +8,13 @@ exp:
 
 vae_name: 'hrvae_detail'
 vae_config: '../configs/vae_hrvae_detail.yaml'
-vae_checkpoint: '../pretrained/hrvae_detail/net_best_mpjpe.tar'
+vae_checkpoint: '../checkpoints/vae/net_best_mpjpe.tar'
 vae_ckpt: 'net_best_mpjpe.tar'
 
 diffusion:
   which_epoch: 'net_best_fid.tar'
-  checkpoint_path: '../pretrained/umt5-xxl/models_t5_umt5-xxl-enc-bf16.pth'
+  model_checkpoint: '../checkpoints/base_dit/net_best_fid.tar'
+  text_encoder_path: '../pretrained/umt5-xxl/models_t5_umt5-xxl-enc-bf16.pth'
   tokenizer_path: '../pretrained/umt5-xxl/tokenizer'
   input_dim: 32
   hidden_dim: 1024

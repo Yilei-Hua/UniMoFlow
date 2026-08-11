@@ -6,7 +6,7 @@
 | Section | Field | Purpose |
 |---|---|---|
 | `exp` | `root_ckpt_dir`, `root_log_dir`, `device` | Checkpoint/log roots and training device |
-| root | `vae_config`, `vae_checkpoint` | HRVAE architecture config and weights |
+| root | `vae_config`, `vae_checkpoint` | VAE architecture config and project checkpoint under `checkpoints/vae/` |
 | `data` | `root_dir` | SnapMoGen dataset root |
 | `data` | `edit_*_files` | Train/validation/test edit-pair JSON files |
 | `data` | `gen_latent_dir` | Text-to-motion latent directory under the data root |
@@ -23,10 +23,10 @@ The released UniMoFlow checkpoint expects latent dimension 32, hidden dimension 
 
 | Section | Field | Purpose |
 |---|---|---|
-| `exp` | `diff_name` | Directory name of the pretrained Omni-MoEdit motion DiT |
-| root | `vae_config`, `vae_checkpoint` | Shared HRVAE config and weights |
-| `diffusion` | `which_epoch` | Motion-DiT checkpoint filename |
-| `diffusion` | text encoder paths | Shared uMT5-XXL encoder assets |
+| `exp` | `diff_name` | Experiment name retained for logs and backward compatibility |
+| root | `vae_config`, `vae_checkpoint` | Shared VAE config and project checkpoint under `checkpoints/vae/` |
+| `diffusion` | `model_checkpoint` | Base DiT project checkpoint under `checkpoints/base_dit/` |
+| `diffusion` | `text_encoder_path`, `tokenizer_path` | External uMT5-XXL assets under `pretrained/` |
 | `flowedit` | steps and CFG | Motion synthesis/edit sampling controls |
 | `filtering` | matching/R-precision/preservation thresholds | First-stage acceptance criteria |
 | `reedit_filter` | thresholds | Regeneration acceptance criteria |

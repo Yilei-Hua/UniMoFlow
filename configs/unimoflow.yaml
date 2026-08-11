@@ -11,7 +11,7 @@ exp:
 
 vae_name: 'hrvae_detail'
 vae_config: '../configs/vae_hrvae_detail.yaml'
-vae_checkpoint: '../pretrained/hrvae_detail/net_best_mpjpe.tar'
+vae_checkpoint: '../checkpoints/vae/net_best_mpjpe.tar'
 vae_ckpt: 'net_best_mpjpe.tar'
 
 data:
