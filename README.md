@@ -1,13 +1,13 @@
 # UniMoFlow
 
 [![arXiv](https://img.shields.io/badge/arXiv-2608.09143-b31b1b.svg)](https://arxiv.org/abs/2608.09143)
-[![Project Page](https://img.shields.io/badge/Project-Page-1f6f5c.svg)](https://unimoflow-motion.shayla-fralix845.chatgpt.site)
+[![Project Page](https://img.shields.io/badge/Project-Page-1f6f5c.svg)](https://yilei-hua.github.io/UniMoFlow/)
 
 Official code release for **UniMoFlow: Grounding Instruction-Driven 3D Human Motion Editing in Generation**.
 
 UniMoFlow studies 3D human motion generation and instruction-driven motion editing in a unified latent flow-matching framework. The model treats text-to-motion generation and source-conditioned editing as mutually supportive abilities: it learns from high-quality text-to-motion data and synthetic instruction-edit triplets, then switches between generation and editing through a shared context token sequence and task-aware attention masks. The repository also includes the **Omni-MoEdit** data synthesis pipeline used to construct instruction-driven edit supervision.
 
-> Paper: [arXiv:2608.09143](https://arxiv.org/abs/2608.09143). Project page: [UniMoFlow](https://unimoflow-motion.shayla-fralix845.chatgpt.site).
+> Paper: [arXiv:2608.09143](https://arxiv.org/abs/2608.09143). Project page: [UniMoFlow](https://yilei-hua.github.io/UniMoFlow/).
 
 <p align="center">
   <img src="assets/teaser.webp" alt="UniMoFlow teaser" width="95%">
@@ -16,7 +16,7 @@ UniMoFlow studies 3D human motion generation and instruction-driven motion editi
 ## Links
 
 - Paper: [arXiv](https://arxiv.org/abs/2608.09143) | [PDF](https://arxiv.org/pdf/2608.09143)
-- Project page: [UniMoFlow](https://unimoflow-motion.shayla-fralix845.chatgpt.site)
+- Project page: [UniMoFlow](https://yilei-hua.github.io/UniMoFlow/)
 - Checkpoints: [Baidu Netdisk](https://pan.baidu.com/s/1FT7uGIhXzmHsaVIkc8-TuQ) (access code: `wpun`)
 - Omni-MoEdit synthetic data: [Baidu Netdisk](https://pan.baidu.com/s/1U7aOf-z9cjHXogDayprQyA) (access code: `uupk`)
 
